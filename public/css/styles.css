@@ -7,3 +7,8 @@ table, th, td {
 table { 
     border-collapse: collapse; 
 }
+
+.example {
+    text-align:left; 
+    color:blue;
+}    
