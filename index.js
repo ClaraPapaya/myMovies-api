@@ -110,5 +110,5 @@ app.delete('/users/:name', (req, res) => {
 
 // listen for requests
 app.listen(port, () => {
-    console.log('Your app is listening on port ${port}');
+    console.log(`Your app is listening on port ${port}`);
 });
