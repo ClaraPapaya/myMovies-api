@@ -45,7 +45,7 @@
                             the last place in the world Ray wants to be."<br>
                             genre: Comedy, Crime, Drama<br>
                             director: "Martin McDonagh"<br>
-                            image URL: https://www.imdb.com/title/tt0780536/?ref_=fn_al_tt_1<br>}</p>
+                            image URL: /img/inbruges.png<br>}</p>
                     </td>
                 </tr>
                 <tr>
@@ -72,34 +72,34 @@
                     <td>/users</td>
                     <td>POST</td>
                     <td>A JSON object holding data about the new user, structured like:
-                        <p class="example">{<br>username: "Clara"<br>email: "clarawiegand@gmx.de",<br>password:12345678<br>}</p>
+                        <p class="example">{<br>username: "Clara"<br>email: "clarawiegand@gmx.de",<br>password:12345678<br>, <br>birthday:1985-10-12<br>}</p>
                     </td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>Update user profile</td>
-                    <td>/users/[name]</td>
+                    <td>/users/[username]</td>
                     <td>PUT</td>
                     <td>None</td>
                     <td>A text message indicating the chosen data was updated sucessfully.</td>
                 </tr>
                 <tr>
                     <td>Add movie</td>
-                    <td>/users/[name]/[title]</td>
+                    <td>/users/[username]/[title]</td>
                     <td>PUT</td>
                     <td>None</td>
                     <td>A text message that the movie was added sucessfully.</td>
                 </tr>
                 <tr>
                     <td>Remove movie</td>
-                    <td>/users/[name]/[title]</td>
+                    <td>/users/[username]/[title]</td>
                     <td>DELETE</td>
                     <td>None</td>
                     <td>A text message that the movie was deleted sucessfully.</td>
                 </tr>
                 <tr>
                     <td>Deregister a user</td>
-                    <td>/users/[name]</td>
+                    <td>/users/[username]</td>
                     <td>DELETE</td>
                     <td>None</td>
                     <td>A text message that the user email was deleted.</td>

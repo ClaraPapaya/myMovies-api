@@ -87,23 +87,23 @@ app.post('/users', (req,res) => {
 });
 
 // PUT requests
-app.put('/users/:name', (req, res) => {
+app.put('/users/:username', (req, res) => {
     res.send('A sucessful update of the user profile.')
     //handler method
 });
 
-app.put('/users/:name/:title', (req, res) => {
+app.put('/users/:username/:title', (req, res) => {
     res.send('Movie object is added to a user\'s list.')
     //handler method
 });
 
 // DELETE requests
-app.delete('/users/:name/:title', (req, res) => {
+app.delete('/users/:username/:title', (req, res) => {
     res.send('Successful deletion of a movie from a user\'s list.')
     //handler method
 });
 
-app.delete('/users/:name', (req, res) => {
+app.delete('/users/:username', (req, res) => {
     res.send('Successful deletion of a user\'s account.')
     //handler method
 });
