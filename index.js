@@ -1,15 +1,24 @@
 const express = require('express'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
-    uuid = require('uuid');
+    uuid = require('uuid'),
+    mongoose = require('mongoose'),
+    Models = require('./models.js');
 
 const port = process.env.PORT || 8080;
     
 const app = express();
 
+const Movies = Models.Movie;
+const Users = Models.User;
+
 app.use(bodyParser.json());
 app.use(morgan('common'));
 app.use(express.static('public')); 
+
+mongoose.connect('mongodb://localhost:27017/myMoviesDB', {
+    useNewUrlParser: true, useUnifiedTopology: true
+});
 
 // in-memory data
 let topMovies = [
