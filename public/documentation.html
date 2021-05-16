@@ -3,8 +3,23 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="./css/styles.css">
         <title>Documentation</title>
+        <style>
+            table, th, td { 
+                border: 1px solid black;
+                text-align: center;
+                padding: 5px; 
+                } 
+
+            table { 
+                border-collapse: collapse; 
+            }   
+
+            .example {
+                text-align:left; 
+                color:blue;
+            }    
+        </style>
     </head>
     <body>
         <h1>Documentation Page</h1>
@@ -49,15 +64,15 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Get information about the movie genre.</td>
-                    <td>/movies/[genre]</td>
+                    <td>Get information about the movie by genre.</td>
+                    <td>/movies/genres/[genre]</td>
                     <td>GET</td>
                     <td>None</td>
                     <td>A JSON object holding data about the movie's genre.</td>
                 </tr>
                 <tr>
                     <td>Get information about the movie's director by name.</td>
-                    <td>/movies/[director]</td>
+                    <td>/movies/directors/[director]</td>
                     <td>GET</td>
                     <td>None</td>
                     <td>A JSON object holding data about the movie's director. Example:
@@ -85,14 +100,14 @@
                 </tr>
                 <tr>
                     <td>Add movie</td>
-                    <td>/users/[username]/[title]</td>
+                    <td>/users/[username]/movies/[title]</td>
                     <td>PUT</td>
                     <td>None</td>
                     <td>A text message that the movie was added sucessfully.</td>
                 </tr>
                 <tr>
                     <td>Remove movie</td>
-                    <td>/users/[username]/[title]</td>
+                    <td>/users/[username]/movies/[title]</td>
                     <td>DELETE</td>
                     <td>None</td>
                     <td>A text message that the movie was deleted sucessfully.</td>
