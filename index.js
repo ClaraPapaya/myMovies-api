@@ -180,12 +180,13 @@ app.post('/users/:Username/movies/:FavoriteMovies', (req, res) => {
     }*/
 app.put('/users/:Username', (req, res) => {
     Users.findOneAndUpdate({Username: req.params.Username},
-        {$set:
+        {
+            $set:
             {
-            Username: req.body.Username,
-            Password: req.body.Password,
-            Email: req.body.Email,
-            Birthday: req.body.Birthday
+                Username: req.body.Username,
+                Password: req.body.Password,
+                Email: req.body.Email,
+                Birthday: req.body.Birthday
             }
         },
         {new: true}, //This line makes sure the updated document is returned
@@ -206,15 +207,14 @@ app.put('/users/:Username', (req, res) => {
     {
     FavoriteMovies: String
     }*/
-// DOES NOT WORK: Error in Postman: "MongooseError: Callback must be a function, got [object Object]<br> &nbsp; &nbsp;at Function.Model.$handleCallbackError"
 app.delete('/users/:Username/movies/:FavoriteMovies', (req, res) => {
-    Users.findOneAndRemove({Username: req.params.Username},
-        {$pull:
-            {
-            FavoriteMovies: req.params.FavoriteMovies
+    Users.findOneAndUpdate({Username: req.params.Username},
+        {$pull: 
+            { 
+            FavoriteMovies: req.params.FavoriteMovies 
             }
         },
-        {new: true},
+        {new: true }, // This line makes sure that the updated document is returned
         (err, updatedUser) => {
         if(err) {
             console.error(err);
