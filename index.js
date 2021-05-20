@@ -126,7 +126,7 @@ app.get('/users/:Username', passport.authenticate('jwt', {session: false}), (req
         Birthday: Date
     }*/
 
-app.post('/users', passport.authenticate('jwt', {session: false}), (req,res) => {
+app.post('/users', (req,res) => {
     Users.findOne({Username: req.body.Username})
         .then((user) => {
             if(user) {
