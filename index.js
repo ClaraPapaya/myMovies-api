@@ -1,9 +1,8 @@
 const express = require('express'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
-    uuid = require('uuid'),
     mongoose = require('mongoose'),
-    Models = require('./models.js');    
+    Models = require('./models/models.js');    
 
 const port = process.env.PORT || 8080;
     
@@ -20,10 +19,10 @@ mongoose.connect('mongodb://localhost:27017/myMoviesDB', {
     useNewUrlParser: true, useUnifiedTopology: true
 });
 
-let auth = require('./auth.js')(app);
+let auth = require('./middleware/auth.js')(app);
 
 passport = require('passport');
-require('./passport.js');
+require('./helpers/passport.js');
 
 
 // Error Handling
