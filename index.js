@@ -2,7 +2,8 @@ const express = require('express'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
     mongoose = require('mongoose'),
-    Models = require('./models/models.js');    
+    Models = require('./models/models.js'),
+    cors = require('cors');   
 
 const port = process.env.PORT || 8080;
     
@@ -10,7 +11,8 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(morgan('common'));
-app.use(express.static('public')); 
+app.use(express.static('public'));
+app.use(cors()); 
 
 const Movies = Models.Movie;
 const Users = Models.User;
@@ -36,7 +38,7 @@ app.use((err, req, res, next) => {
 app.get('/', (req, res) => {
     res.send('Welcome to my Movie App!')
 });
-// access the API documentation
+// Access the API documentation
 app.get('/documentation', (req, res) => {
     res.sendFile(__dirname + '/public/documentation.html')
 });
@@ -53,7 +55,7 @@ app.get('/movies', passport.authenticate('jwt', {session: false}), (req, res) =>
         });
 });
 
-//Get info about a movie by title
+// Get info about a movie by title
 app.get('/movies/:Title', passport.authenticate('jwt', {session: false}), (req,res) => {
     Movies.findOne({Title: req.params.Title})
         .then((movie) => {
@@ -114,7 +116,6 @@ app.get('/users/:Username', passport.authenticate('jwt', {session: false}), (req
 });
 
 // POST requests
-
 // Add a user
 /* We'll expect JSON in this format
     {
@@ -126,6 +127,7 @@ app.get('/users/:Username', passport.authenticate('jwt', {session: false}), (req
     }*/
 
 app.post('/users', (req,res) => {
+    let hashedPassword = Users.hashPassword(req.body.Password);
     Users.findOne({Username: req.body.Username})
         .then((user) => {
             if(user) {
@@ -134,15 +136,16 @@ app.post('/users', (req,res) => {
                 Users
                     .create({
                         Username: req.body.Username,
-                        Password: req.body.Password,
+                        Password: hashedPassword,
                         Email: req.body.Email,
                         Birthday: req.body.Birthday
                     })
-                    .then((user) => {res.status(201).json(user)})
-                .catch((error) => {
-                    console.error(error);
-                    res.status(500).send('Error: ' + error);
-                })    
+                    .then((user) => {res.status(201).json(user)
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                        res.status(500).send('Error: ' + error);
+                    });    
             }
         })
         .catch((error) => {
