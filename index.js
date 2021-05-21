@@ -18,7 +18,13 @@ app.use(cors());
 const Movies = Models.Movie;
 const Users = Models.User;
 
-mongoose.connect('mongodb://localhost:27017/myMoviesDB', {
+// To connect to loacal database
+// mongoose.connect('mongodb://localhost:27017/myMoviesDB', {
+//     useNewUrlParser: true, useUnifiedTopology: true
+// });
+
+// To connect to remote database
+mongoose.connect('process.env.CONNECTION_URI', {
     useNewUrlParser: true, useUnifiedTopology: true
 });
 
