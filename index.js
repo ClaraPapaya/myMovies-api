@@ -3,7 +3,8 @@ const express = require('express'),
     bodyParser = require('body-parser'),
     mongoose = require('mongoose'),
     Models = require('./models/models.js'),
-    cors = require('cors');   
+    cors = require('cors');
+const {check, validateResult} = require('express-validator');   
 
 const port = process.env.PORT || 8080;
     
@@ -126,33 +127,44 @@ app.get('/users/:Username', passport.authenticate('jwt', {session: false}), (req
         Birthday: Date
     }*/
 
-app.post('/users', (req,res) => {
-    let hashedPassword = Users.hashPassword(req.body.Password);
-    Users.findOne({Username: req.body.Username})
-        .then((user) => {
-            if(user) {
-                return res.status(409).send(req.body.Username + 'already exists');
-            } else {
-                Users
-                    .create({
-                        Username: req.body.Username,
-                        Password: hashedPassword,
-                        Email: req.body.Email,
-                        Birthday: req.body.Birthday
-                    })
-                    .then((user) => {res.status(201).json(user)
-                    })
-                    .catch((error) => {
-                        console.error(error);
-                        res.status(500).send('Error: ' + error);
-                    });    
-            }
-        })
-        .catch((error) => {
-            console.error(error);
-            res.status(500).send('Error: ' + error);
-        });
-});
+app.post('/users', 
+    [ 
+        check('Username', 'Username is required.').isLength({min: 5}),
+        check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+        check('Password', 'Password is required.').not().isEmpty(),
+        check('Email', 'Email does not appear to be valid.').isEmail()
+    ],
+    (req,res) => {
+        let errors = validationResult(req); // checks the validation object for errors
+        if(!errors.isEmpty()) {
+            return res.status(422).json({errors: errors.array()});
+        }
+        let hashedPassword = Users.hashPassword(req.body.Password);
+        Users.findOne({Username: req.body.Username})
+            .then((user) => {
+                if(user) {
+                    return res.status(409).send(req.body.Username + 'already exists');
+                } else {
+                    Users
+                        .create({
+                            Username: req.body.Username,
+                            Password: hashedPassword,
+                            Email: req.body.Email,
+                            Birthday: req.body.Birthday
+                        })
+                        .then((user) => {res.status(201).json(user)
+                        })
+                        .catch((error) => {
+                            console.error(error);
+                            res.status(500).send('Error: ' + error);
+                        });    
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+                res.status(500).send('Error: ' + error);
+            });
+    });
 
 // Add a movie to a user's list of favorites
 /* We'll expect JSON in this format
@@ -250,6 +262,6 @@ app.delete('/users/:Username', passport.authenticate('jwt', {session: false}), (
 });
 
 // listen for requests
-app.listen(port, () => {
-    console.log(`Your app is listening on port ${port}`);
+app.listen(port, '0.0.0.0',() => {
+    console.log('Your app is listening on port ' + port);
 });
