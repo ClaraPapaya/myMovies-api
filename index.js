@@ -1,14 +1,13 @@
 const express = require('express'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
+    app = express();
     mongoose = require('mongoose'),
     Models = require('./models/models.js'),
-    cors = require('cors');
-const {check, validationResult} = require('express-validator');   
-
-const port = process.env.PORT || 8080;
-    
-const app = express();
+    Movies = Models.Movie;
+    Users = Models.User;
+    cors = require('cors'),
+    {check, validationResult} = require('express-validator');   
 
 app.use(bodyParser.json());
 app.use(morgan('common'));
@@ -28,18 +27,16 @@ app.use(cors());
 //     }
 // })); 
 
-const Movies = Models.Movie;
-const Users = Models.User;
 
 // To connect to local database
-mongoose.connect('mongodb://localhost:27017/myMoviesDB', {
-    useNewUrlParser: true, useUnifiedTopology: true
-});
-
-// To connect to online database
-// mongoose.connect('process.env.CONNECTION_URI', {
+// mongoose.connect('mongodb://localhost:27017/myMoviesDB', {
 //     useNewUrlParser: true, useUnifiedTopology: true
 // });
+
+// To connect to online database
+mongoose.connect('process.env.CONNECTION_URI', {
+    useNewUrlParser: true, useUnifiedTopology: true
+});
 
 let auth = require('./middleware/auth.js')(app);
 
@@ -47,6 +44,7 @@ passport = require('passport');
 require('./helpers/passport.js');
 
 // Listen for requests
+const port = process.env.PORT || 8080;
 app.listen(port, '0.0.0.0',() => {
     console.log('Listening on port ' + port);
 });
