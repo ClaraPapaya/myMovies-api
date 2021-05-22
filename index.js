@@ -46,6 +46,10 @@ let auth = require('./middleware/auth.js')(app);
 passport = require('passport');
 require('./helpers/passport.js');
 
+// Listen for requests
+app.listen(port, '0.0.0.0',() => {
+    console.log('Listening on port ' + port);
+});
 
 // Error Handling
 app.use((err, req, res, next) => {
@@ -290,9 +294,4 @@ app.delete('/users/:Username', passport.authenticate('jwt', {session: false}), (
             console.error(err);
             res.status (500).send('Error: ' + err);
         });
-});
-
-// listen for requests
-app.listen(port, '0.0.0.0',() => {
-    console.log('Your app is listening on port ' + port);
 });
