@@ -34,7 +34,7 @@ app.use(cors());
 // });
 
 // To connect to online database
-mongoose.connect('process.env.CONNECTION_URI', {
+mongoose.connect(process.env.CONNECTION_URI, {
     useNewUrlParser: true, useUnifiedTopology: true
 });
 
