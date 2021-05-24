@@ -43,12 +43,6 @@ let auth = require('./middleware/auth.js')(app);
 passport = require('passport');
 require('./helpers/passport.js');
 
-// Listen for requests
-const port = process.env.PORT || 8080;
-app.listen(port, '0.0.0.0',() => {
-    console.log('Listening on port ' + port);
-});
-
 // Error Handling
 app.use((err, req, res, next) => {
     console.log(err.stack);
@@ -292,4 +286,10 @@ app.delete('/users/:Username', passport.authenticate('jwt', {session: false}), (
             console.error(err);
             res.status (500).send('Error: ' + err);
         });
+});
+
+// Listen for requests
+const port = process.env.PORT || 8080;
+app.listen(port, '0.0.0.0',() => {
+    console.log('Listening on port ' + port);
 });
