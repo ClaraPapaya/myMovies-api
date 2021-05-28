@@ -59,8 +59,8 @@ app.get('/documentation', (req, res) => {
   res.sendFile(__dirname + '/public/documentation.html')
 });
 
-// Get a list of all movies
-app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
+// Get a list of all movies; temp. removed: passport.authenticate('jwt', { session: false }), 
+app.get('/movies', (req, res) => {
   Movies.find()
     .then((movies) => {
       res.status(200).json(movies);
