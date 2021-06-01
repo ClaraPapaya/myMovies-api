@@ -40,7 +40,7 @@ mongoose.connect(process.env.CONNECTION_URI, {
 
 let auth = require('./middleware/auth.js')(app);
 
-passport = require('passport');
+const passport = require('passport');
 require('./helpers/passport.js');
 
 // Error Handling
