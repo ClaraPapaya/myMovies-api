@@ -13,6 +13,8 @@ app.use(bodyParser.json());
 app.use(morgan('common'));
 app.use(express.static('public'));
 
+const passport = require('passport');
+require('./helpers/passport.js');
 
 // Needed for testing: CORS measure to restrict access from all domains
 app.use(cors());
@@ -42,9 +44,6 @@ mongoose.connect(process.env.CONNECTION_URI, {
 });
 
 let auth = require('./middleware/auth.js')(app);
-
-const passport = require('passport');
-require('./helpers/passport.js');
 
 // Error Handling
 app.use((err, req, res, next) => {
