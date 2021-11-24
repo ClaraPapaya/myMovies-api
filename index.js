@@ -62,7 +62,7 @@ app.get('/documentation', (req, res) => {
 });
 
 // Get a list of all movies; temp. removed:  
-app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.get('/movies', (req, res) => {
   Movies.find()
     .then((movies) => {
       res.status(200).json(movies);
@@ -298,3 +298,5 @@ const port = process.env.PORT || 8080;
 app.listen(port, '0.0.0.0', () => {
   console.log('Listening on port ' + port);
 });
+
+// passport.authenticate('jwt', { session: false }),
