@@ -1,12 +1,11 @@
 const express = require('express'),
   morgan = require('morgan'),
   bodyParser = require('body-parser'),
-  app = express();
-mongoose = require('mongoose'),
+  app = express(),
+  mongoose = require('mongoose'),
   Models = require('./models/models.js'),
-  Movies = Models.Movie;
-Users = Models.User;
-cors = require('cors'),
+  Movies = Models.Movie,
+  Users = Models.User,
   { check, validationResult } = require('express-validator');
 
 app.use(bodyParser.json());
@@ -16,27 +15,24 @@ app.use(express.static('public'));
 const passport = require('passport');
 require('./helpers/passport.js');
 
-// Needed for testing: CORS measure to restrict access from all domains
-app.use(cors());
+// CORS policy
+const cors = require('cors');
+let allowedOrigins = ['https://clarapapaya.github.io/myMovies-Angular-client/', 'https://allmymovies.netlify.app', 'https://allmymovies.herokuapp.com/', 'http://localhost:8080'];
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      let message = 'The CORS policy for this application does not allow access from origin ' + origin;
+      return callback(new Error(message), false);
+    }
+    return callback(null, true);
+  }
+}));
 
-// let allowedOrigins = ['https://localhost:1234', 'https://localhost:1234/login', 'http://localhost:8080', 'https://allmymovies.herokuapp.com/', 'https://allmymovies.netlify.app', 'http://localhost:8080/login', 'https://allmymovies.herokuapp.com/login'];
-
-// app.use(cors({
-//   origin: (origin, callback) => {
-//     if (!origin) return callback(null, true);
-//     if (allowedOrigins.indexOf(origin) === -1) {
-//       let message = 'The CORS policy for this application does not allow access from origin ' + origin;
-//       return callback(new Error(message), false);
-//     }
-//     return callback(null, true);
-//   }
-// }));
-
-
-// To connect to local database
-// mongoose.connect('mongodb://localhost:27017/myMoviesDB', {
-//     useNewUrlParser: true, useUnifiedTopology: true
-// });
+/* To connect to local database:
+mongoose.connect('mongodb://localhost:27017/myMoviesDB', {
+  useNewUrlParser: true, useUnifiedTopology: true
+}); */
 
 // To connect to online database
 mongoose.connect(process.env.CONNECTION_URI, {
@@ -52,10 +48,15 @@ app.use((err, req, res, next) => {
 });
 
 // GET requests
-// Welcome page of app
+/**
+ * @method getWelcomePage
+ * @param {string} endpoint to fetch welcome page
+ * @returns {string} 
+ */
 app.get('/', (req, res) => {
   res.send('Welcome to my Movie App!')
 });
+
 // Access the API documentation
 app.get('/documentation', (req, res) => {
   res.sendFile(__dirname + '/public/documentation.html')
