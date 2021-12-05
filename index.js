@@ -189,12 +189,12 @@ app.post('/users',
     {
         FavoriteMovies: String
     }*/
-app.post('/users/:Username/movies/:FavoriteMovies', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username },
     {
-      $push:
+      $addToSet: // This ensures if the movie is already there, it won't be added double
       {
-        FavoriteMovies: req.params.FavoriteMovies
+        FavoriteMovies: req.params.MovieID
       }
     },
     { new: true }, // This line makes sure that the updated document is returned
@@ -258,12 +258,12 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }),
     {
     FavoriteMovies: String
     }*/
-app.delete('/users/:Username/movies/:FavoriteMovies', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username },
     {
       $pull:
       {
-        FavoriteMovies: req.params.FavoriteMovies
+        FavoriteMovies: req.params.MovieID
       }
     },
     { new: true }, // This line makes sure that the updated document is returned
