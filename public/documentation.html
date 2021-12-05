@@ -1,125 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Documentation</title>
-        <style>
-            table, th, td { 
-                border: 1px solid black;
-                text-align: center;
-                padding: 5px; 
-                } 
 
-            table { 
-                border-collapse: collapse; 
-            }   
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentation</title>
+  <style>
+    table,
+    th,
+    td {
+      border: 1px solid black;
+      text-align: center;
+      padding: 5px;
+    }
 
-            .example {
-                text-align:left; 
-                color:blue;
-            }    
-        </style>
-    </head>
-    <body>
-        <h1>Documentation Page</h1>
-        <br>
-        <h2>Objective</h2>
-        <p>To build the server-side component of a “movies” web application. 
-        The web application will provide users with access to information about different movies,   
-        directors, and genres. Users will be able to sign up, update their personal information,
-        and create a list of their favorite movies.</p>
-    
-        <h2>URL endpoints</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Request</th>
-                    <th>URL</th>
-                    <th>HTTP Method</th>
-                    <th>Request body data format</th>
-                    <th>Response body data format</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Get a list of all movies</td>
-                    <td>/movies</td>
-                    <td>GET</td>
-                    <td>None</td>
-                    <td>A JSON object holding data about all the movies.</td>
-                </tr>
-                <tr>
-                    <td>Get information about a movie by title</td>
-                    <td>/movies/[title]</td>
-                    <td>GET</td>
-                    <td>None</td>
-                    <td>A JSON object holding data about a specific movie. Example:
-                        <p class="example">{<br>
-                            description: "Guilt-stricken after a job gone wrong, hitman Ray and his partner await orders from their ruthless boss in Bruges, Belgium, 
-                            the last place in the world Ray wants to be."<br>
-                            genre: Comedy, Crime, Drama<br>
-                            director: "Martin McDonagh"<br>
-                            image URL: /img/inbruges.png<br>}</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Get information about the movie by genre.</td>
-                    <td>/movies/genres/[genre]</td>
-                    <td>GET</td>
-                    <td>None</td>
-                    <td>A JSON object holding data about the movie's genre.</td>
-                </tr>
-                <tr>
-                    <td>Get information about the movie's director by name.</td>
-                    <td>/movies/directors/[director]</td>
-                    <td>GET</td>
-                    <td>None</td>
-                    <td>A JSON object holding data about the movie's director. Example:
-                        <p class="example">{<br>bio:"Martin McDonagh was born on March 26, 1970 in Camberwell, London, England. 
-                            He is a writer and director, known for In Bruges (2008), Three Billboards Outside Ebbing, Missouri (2017) and Seven Psychopaths (2012)."<br>
-                            birth year: 1970<br>
-                            death year: none<br>}</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Register a user</td>
-                    <td>/users</td>
-                    <td>POST</td>
-                    <td>A JSON object holding data about the new user, structured like:
-                        <p class="example">{<br>username: "Clara"<br>email: "clarawiegand@gmx.de",<br>password:12345678<br>, <br>birthday:1985-10-12<br>}</p>
-                    </td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Update user profile</td>
-                    <td>/users/[username]</td>
-                    <td>PUT</td>
-                    <td>None</td>
-                    <td>A text message indicating the chosen data was updated sucessfully.</td>
-                </tr>
-                <tr>
-                    <td>Add movie</td>
-                    <td>/users/[username]/movies/[title]</td>
-                    <td>PUT</td>
-                    <td>None</td>
-                    <td>A text message that the movie was added sucessfully.</td>
-                </tr>
-                <tr>
-                    <td>Remove movie</td>
-                    <td>/users/[username]/movies/[title]</td>
-                    <td>DELETE</td>
-                    <td>None</td>
-                    <td>A text message that the movie was deleted sucessfully.</td>
-                </tr>
-                <tr>
-                    <td>Deregister a user</td>
-                    <td>/users/[username]</td>
-                    <td>DELETE</td>
-                    <td>None</td>
-                    <td>A text message that the user email was deleted.</td>
-                </tr>
-            </tbody>
-        </table>    
-    </body>    
+    table {
+      border-collapse: collapse;
+    }
+
+    .example {
+      text-align: left;
+      color: blue;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Documentation Page</h1>
+  <br>
+  <h2>Objective</h2>
+  <p>To build the server-side component of a “movies” web application.
+    The web application will provide users with access to information about different movies,
+    directors, and genres. Users will be able to sign up, update their personal information,
+    and create a list of their favorite movies.</p>
+
+  <h2>URL endpoints</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Request</th>
+        <th>URL</th>
+        <th>HTTP Method</th>
+        <th>Request body data format</th>
+        <th>Response body data format</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Get a list of all movies</td>
+        <td>/movies</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>A JSON object holding data about all the movies.</td>
+      </tr>
+      <tr>
+        <td>Get information about a movie by title</td>
+        <td>/movies/[Title]</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>A JSON object holding data about a specific movie. Example:
+          <p class="example">{<br>
+            description: "Guilt-stricken after a job gone wrong, hitman Ray and his partner await orders from their
+            ruthless boss in Bruges, Belgium,
+            the last place in the world Ray wants to be."<br>
+            genre: Comedy, Crime, Drama<br>
+            director: "Martin McDonagh"<br>
+            image URL: /img/inbruges.png<br>}</p>
+        </td>
+      </tr>
+      <tr>
+        <td>Get information about the movie by genre.</td>
+        <td>/movies/genres/[Genre]</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>A JSON object holding data about the movie's genre.</td>
+      </tr>
+      <tr>
+        <td>Get information about the movie's director by name.</td>
+        <td>/movies/directors/[Name]</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>A JSON object holding data about the movie's director. Example:
+          <p class="example">{<br>bio:"Martin McDonagh was born on March 26, 1970 in Camberwell, London, England.
+            He is a writer and director, known for In Bruges (2008), Three Billboards Outside Ebbing, Missouri (2017)
+            and Seven Psychopaths (2012)."<br>
+            birth year: 1970<br>
+            death year: none<br>}</p>
+        </td>
+      </tr>
+      <tr>
+        <td>Register a user</td>
+        <td>/users</td>
+        <td>POST</td>
+        <td>A JSON object holding data about the new user, structured like:
+          <p class="example">{<br>username: "Clara"<br>email: "clarawiegand@gmx.de",<br>password:12345678<br>,
+            <br>birthday:1985-10-12<br>}
+          </p>
+        </td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Update user profile</td>
+        <td>/users/[Username]</td>
+        <td>PUT</td>
+        <td>None</td>
+        <td>A text message indicating the chosen data was updated sucessfully.</td>
+      </tr>
+      <tr>
+        <td>Add movie</td>
+        <td>/users/[Username]/movies/[MovieID]</td>
+        <td>PUT</td>
+        <td>None</td>
+        <td>A text message that the movie was added sucessfully.</td>
+      </tr>
+      <tr>
+        <td>Remove movie</td>
+        <td>/users/[Username]/movies/[MovieID]</td>
+        <td>DELETE</td>
+        <td>None</td>
+        <td>A text message that the movie was deleted sucessfully.</td>
+      </tr>
+      <tr>
+        <td>Deregister a user</td>
+        <td>/users/[Username]</td>
+        <td>DELETE</td>
+        <td>None</td>
+        <td>A text message that the user email was deleted.</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+
 </html>
