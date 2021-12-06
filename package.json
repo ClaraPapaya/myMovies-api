@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ClaraPapaya/myMoviesApp.git"
+    "url": "git+https://github.com/ClaraPapaya/myMovies-api.git"
   },
   "keywords": [],
   "author": "ClaraPapaya",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ClaraPapaya/myMoviesApp/issues"
+    "url": "https://github.com/ClaraPapaya/myMovies-api/issues"
   },
-  "homepage": "https://github.com/ClaraPapaya/myMoviesApp#readme",
+  "homepage": "https://github.com/ClaraPapaya/myMovies-api#readme",
   "description": "",
   "dependencies": {
     "bcrypt": "^5.0.1",
