@@ -1,5 +1,5 @@
-# myMoviesApp
-This API is hosted on [Heroku](https://www.heroku.com/)
+# myMovies-api
+This API is hosted on [Heroku](https://www.allmymovies.herokuapp.com/)
 ## About The Project
 This project is the server-side component of a movies web application, that provides users with access to information about different movies, directors, and genres. Users will also be able to register, login, update their personal information, create a list of their favorite movies, and delete their profile.
 
@@ -30,7 +30,12 @@ As a user, I want to be able to create a profile so I can save data about my fav
 
 ## Tested With
 * [Postman](https://www.postman.com/)
+
+## Hosting
+* [Heroku](https://www.heroku.com/)
+* [MongoDB](https://www.mongodb.com/)
+
 ## Getting Started
-Please refer to the **documentation.html** for information of the API endpoints.
+Please refer to the **[documentation.html](https://allmymovies.herokuapp.com/documentation)** file for information on the API endpoints.
 
 
