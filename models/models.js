@@ -12,7 +12,6 @@ let movieSchema = mongoose.Schema({
     Name: String,
     Bio: String,
   },
-  Actors: [String],
   ImagePath: String,
   Featured: Boolean
 });
@@ -25,6 +24,11 @@ let userSchema = mongoose.Schema({
   FavoriteMovies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }]
 });
 
+/**
+ * @method hashPassword to ensure the user's password is stored encrypted in the database
+ * @param {string} password
+ * @returns {string} encrypted password in user object on database
+ */
 userSchema.statics.hashPassword = (password) => {
   return bcrypt.hashSync(password, 10);
 };
