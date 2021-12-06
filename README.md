@@ -8,6 +8,7 @@ The objective is to create a simple REST API that allows users to be able to sig
 
 ### Key Features
 **User Story 1:** As a user, I want to be able to receive information on movies, directors, and genres so that I can learn more about movies I’ve watched or am interested in.
+
 **User Story 2:**
 As a user, I want to be able to create a profile so I can save data about my favorite movies.
 
