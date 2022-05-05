@@ -1,5 +1,5 @@
 # myMovies-api
-This API is hosted on [Heroku](https://allmymovies.herokuapp.com/)
+This API is hosted on [Heroku](https://allmymovies.herokuapp.com/).
 ## About The Project
 This project is the server-side component of a movies web application, that provides users with access to information about different movies, directors, and genres. Users will also be able to register, login, update their personal information, create a list of their favorite movies, and delete their profile.
 
